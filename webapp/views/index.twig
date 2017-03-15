@@ -2,7 +2,16 @@
 <html>
 
 <head>
-	{% block head %}{% endblock %}
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="generator" content="storyblok">
+  <meta name="cms" content="https://www.storyblok.com">
+
+	<title>Storyblok - {{ story.name }}</title>
+	
+	{% for alternate in story.alternates %}
+		<link href="/{{ alternate.full_slug }}" hreflang="{{ alternate.full_slug|split('/')[0] }}" rel="alternate">
+	{% endfor %}
 
 	<link rel="stylesheet" href="{{ asset('styles/main.css') | version }}" media="all" />
 </head>
@@ -14,7 +23,33 @@
 	<script type="text/javascript" src="{{ asset('scripts/vendor.js') | version }}"></script>
 	<script type="text/javascript" src="{{ asset('scripts/main.js') | version }}"></script>
 
-	{% block storyblok %}{% endblock %}
+	{% if app.request.get('_storyblok') %}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
+	<script type="text/javascript">
+		function invalidateStory(data) {
+			$.ajax({
+				url: '/clear_cache',
+				type: 'GET',
+				data: data
+			})
+		}
+
+		storyblok.init();
+
+		storyblok.on('change', function() {
+			window.location.reload(true);
+		});
+		
+		storyblok.on('published', function(data) {
+			invalidateStory(data);
+		});
+
+		storyblok.on('unpublished', function(data) {
+			invalidateStory(data);
+		});
+	</script>
+	{% endif %}
 
 </body>
 
