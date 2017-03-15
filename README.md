@@ -23,7 +23,3 @@ npm install
 ```
 gulp
 ```
-
-## One Click deploy with heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
