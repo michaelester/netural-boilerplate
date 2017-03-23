@@ -2,13 +2,12 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ story.name }}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11"/>
 	<meta name="generator" content="storyblok">
   <meta name="cms" content="https://www.storyblok.com">
-
-	<title>Storyblok - {{ story.name }}</title>
-	
 	{% for alternate in story.alternates %}
 		<link href="/{{ alternate.full_slug }}" hreflang="{{ alternate.full_slug|split('/')[0] }}" rel="alternate">
 	{% endfor %}
@@ -18,9 +17,8 @@
 
 <body>
 
-	{% block content %}{% endblock %}
+	{% include 'components/' ~ story.content.component ~ '.twig' with { blok: story.content } %}
 
-	<script type="text/javascript" src="{{ asset('scripts/vendor.js') | version }}"></script>
 	<script type="text/javascript" src="{{ asset('scripts/main.js') | version }}"></script>
 
 	{% if app.request.get('_storyblok') %}
@@ -49,7 +47,7 @@
 			invalidateStory(data);
 		});
 	</script>
-	{% endif %}
+{% endif %}
 
 </body>
 

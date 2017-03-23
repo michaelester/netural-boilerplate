@@ -1,12 +1,3 @@
-{% extends "index.twig" %}
-
-{# Initial content blok iteration #}
-{% block content %}
-	{% if story.content.component == 'root' %}
-		{% for key, blok in story.content.body %}
-			{% include 'components/' ~ blok.component ~ '.twig' with {blok: blok} %}
-		{% endfor %}
-	{% else %}
-		{% include 'components/' ~ story.content.component ~ '.twig' with {blok: story.content} %}
-	{% endif %}
-{% endblock %}
+{% for key, blok in blok.body %}
+	{% include 'components/' ~ blok.component ~ '.twig' with { blok: blok } %}
+{% endfor %}
