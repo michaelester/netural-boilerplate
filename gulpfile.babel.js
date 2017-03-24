@@ -10,6 +10,7 @@ const globbing = require('gulp-css-globbing')
 const gulp = require('gulp')
 const gitrev = require('git-rev')
 const imagemin = require('gulp-imagemin')
+const notify = require('gulp-notify')
 const plumber = require('gulp-plumber')
 const php = require('gulp-connect-php')
 const reload = browserSync.reload
