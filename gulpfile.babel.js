@@ -55,6 +55,7 @@ gulp.task('scripts', function () {
     target: 'ES5'
   })
     .bundle()
+    .on('error', notify.onError(function (error) { return error.message; }))
     .pipe(source('main.js'))
     .pipe(buffer())
     .pipe(gulp.dest('public/scripts'))
@@ -76,6 +77,7 @@ gulp.task('styles', function () {
     .pipe(sass({
       outputStyle: 'expanded'
     }))
+    .on('error', notify.onError(function (error) { return 'There is an error in your stylesheet.'; }))
     .pipe(autoprefixer())
     .pipe(gulp.dest('public/styles'))
     .pipe(browserSync.stream())
