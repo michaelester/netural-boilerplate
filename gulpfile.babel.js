@@ -123,6 +123,7 @@ gulp.task('default', ['clean', 'version', 'styles', 'scripts', 'scripts:vendor',
     logLevel: 'silent'
   })
 
+  gulp.watch('webapp/views/**/*', reload)  
   gulp.watch('app/styles/**/*', ['styles'])
   gulp.watch('app/scripts/**/*', ['scripts'])
 });
