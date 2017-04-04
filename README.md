@@ -70,4 +70,17 @@ sudo mkdir /usr/local/bin/
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
+## How can I add Google Analytics?
+- add your Google Analytics key to `index.twig`
+
+## How can I add Favicons?
+- Use [RealFaviconGenerator](http://realfavicongenerator.net/) to generate all the icons and files
+- Replace the contents of `app/images/favicons`
+
+## How can I add meta tags?
+- Add a `meta` field to your story and use the custom field type `meta`
+- Uncomment necessary lines in `head.twig`
+- Replace UPPERCASE_PLACEHOLDERS in `head.twig`
+
+
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
