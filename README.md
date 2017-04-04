@@ -28,6 +28,11 @@ npm install
 gulp
 ```
 
+If you are creating a fresh project with this boilerplate please run the following command once to update composer dependencies and commit the new `composer.lock`.
+```shell
+composer update
+```
+
 ## Configuration
 In the `webapp/config.php` all you need to change is the `STORYBLOK_CONFIGURATION` - by adding your space information. [What is a Space?](https://www.storyblok.com/docs/terminology/space):
 
