@@ -25,7 +25,7 @@ git clone https://github.com/netural/netural-boilerplate
 ## Configuration
 In the `webapp/config.php` all you need to change is the `STORYBLOK_CONFIGURATION` - by adding your space information. [What is a Space?](https://www.storyblok.com/docs/terminology/space):
 
-```
+```PHP
 $app['config.home']             = 'home'; #change this to your home story slug
 $app['storyblok.privateToken']  = 'Iw3XKcJb6MwkdZEwoQ9BCQtt'; #change this to your private key.
 ```
@@ -34,14 +34,14 @@ $app['storyblok.privateToken']  = 'Iw3XKcJb6MwkdZEwoQ9BCQtt'; #change this to yo
 
 Make sure [Composer](https://getcomposer.org/) and [npm](https://www.npmjs.com/) are installed:
 
-```
-## Install PHP dependencies.
+```shell
+# Install PHP dependencies.
 composer install
 
-## Install all frontend development related dependencies.
+# Install all frontend development related dependencies.
 npm install
 
-## This will start up a php server on :4040 and a proxy for browsersync on :4200. 
+# This will start up a php server on :4040 and a proxy for browsersync on :4200. 
 gulp
 ```
 
@@ -71,7 +71,7 @@ gulp
 - [Content Delivery API - Introduction](https://www.storyblok.com/docs/Delivery-Api/introduction)
 
 ## How to install composer?
-```
+```shell
 php -r "readfile('https://getcomposer.org/installer');" | php
 sudo mkdir /usr/local/bin/
 sudo mv composer.phar /usr/local/bin/composer
