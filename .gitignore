@@ -1,13 +1,42 @@
-.DS_Store
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+
+# dependencies
+/node_modules
+/bower_components
+
+# IDEs and editors
+/.idea
+/.vscode
+.project
+.classpath
+*.launch
+.settings/
 .ftppass
-*.sass-cache/
-*.sublime-workspace
-*.sublime-project
-bower_components
-cookie.txt
-dist
-node_modules
-log.txt
+.sublime-workspace
+.sublime-project
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Silex Boilerplate
 webapp/vendor
 webapp/cache
 webapp/app.db
