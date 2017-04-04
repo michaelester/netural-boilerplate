@@ -76,11 +76,15 @@ sudo mv composer.phar /usr/local/bin/composer
 ## How can I add Favicons?
 - Use [RealFaviconGenerator](http://realfavicongenerator.net/) to generate all the icons and files
 - Replace the contents of `app/images/favicons`
+- Uncomment necessary lines in `webapp/views/head.twig`
 
-## How can I add meta tags?
+## How can I add meta tags for SEO and social media?
 - Add a `meta` field to your story and use the custom field type `meta`
-- Uncomment necessary lines in `head.twig`
-- Replace UPPERCASE_PLACEHOLDERS in `head.twig`
+- Uncomment necessary lines in `webapp/views/head.twig`
+- Replace UPPERCASE_PLACEHOLDERS in `webapp/views/head.twig`
+
+## How can I add sharing buttons?
+
 
 
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
