@@ -1,25 +1,26 @@
-const autoprefixer = require('gulp-autoprefixer')
-const browserify = require('browserify')
-const browserSync = require('browser-sync')
-const buffer = require('vinyl-buffer')
-const concat = require('gulp-concat')
-const del = require('del')
-const File = require('vinyl')
-const fs = require('fs')
-const globbing = require('gulp-css-globbing')
-const gulp = require('gulp')
-const gitrev = require('git-rev')
-const imagemin = require('gulp-imagemin')
-const notify = require('gulp-notify')
-const plumber = require('gulp-plumber')
-const php = require('gulp-connect-php')
-const reload = browserSync.reload
-const sass = require('gulp-sass')
-const source = require('vinyl-source-stream')
-const size = require('gulp-size')
-const tsify = require('tsify')
+const autoprefixer = require('gulp-autoprefixer');
+const browserify = require('browserify');
+const browserSync = require('browser-sync');
+const buffer = require('vinyl-buffer');
+const concat = require('gulp-concat');
+const del = require('del');
+const File = require('vinyl');
+const fs = require('fs');
+const globbing = require('gulp-css-globbing');
+const gulp = require('gulp');
+const gitrev = require('git-rev');
+const imagemin = require('gulp-imagemin');
+const notify = require('gulp-notify');
+const plumber = require('gulp-plumber');
+const php = require('gulp-connect-php');
+const reload = browserSync.reload;
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
+const size = require('gulp-size');
+const tsify = require('tsify');
+const tslintify = require('tslintify');
 
-const externals = require('./externals.js')
+const externals = require('./externals.js');
 
 gulp.task('clean', function () {
     del.sync(['public']);
@@ -48,15 +49,15 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('scripts', function () {
-    return browserify({
+    const b = browserify({
             entries: 'app/scripts/main.ts',
             debug: true
-        }).plugin('tsify', {
-            noImplicitAny: true,
-            target: 'ES5'
         })
-        .bundle()
-        .on('error', notify.onError(function (error) { return error.message; }))
+        .plugin(tslintify, { format: 'stylish' })
+        .on('error', error =>  console.error(error))
+        .plugin(tsify, { noImplicitAny: true });
+
+    return b.bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
         .pipe(gulp.dest('public/scripts'))
