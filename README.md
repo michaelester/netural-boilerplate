@@ -71,7 +71,7 @@ sudo mv composer.phar /usr/local/bin/composer
 ```
 
 ## How can I add Google Analytics?
-- add your Google Analytics key to `index.twig`
+- Add your Google Analytics key to `index.twig`
 
 ## How can I add Favicons?
 - Use [RealFaviconGenerator](http://realfavicongenerator.net/) to generate all the icons and files
@@ -84,7 +84,11 @@ sudo mv composer.phar /usr/local/bin/composer
 - Replace UPPERCASE_PLACEHOLDERS in `webapp/views/head.twig`
 
 ## How can I add sharing buttons?
+- Uncomment the `SocialShareController` in `app/scripts/controllers/Controllers.ts`
+- Learn how to use it in `app/scripts/controllers/SocialShareController.ts`
 
-
+## How can I add critical CSS for above the fold ?
+- `app/styles/inline.scss` will be inlined on top of each page
+- If you optimize for critical CSS, **move** styles from `main.scss` to `inline.scss` 
 
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)

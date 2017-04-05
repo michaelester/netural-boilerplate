@@ -113,7 +113,7 @@ class Twig implements ServiceProviderInterface
 
                 $app['storyblok']->getStories(
                     array_filter(
-                        array_merge( $options, 
+                        array_merge( $options,
                             array(
                             'starts_with' => $starts_with,
                             'per_page' => $per_page,
@@ -143,7 +143,7 @@ class Twig implements ServiceProviderInterface
 
         /*
         * allows you to access a single story by slug
-        * 
+        *
         * Hint: If you want to get the story from an Storylink just use the `| url` to generate the full slug.
         *
         * Usage: `{% set story = getStoryBySlug('/your/full/slug') %}`
@@ -151,7 +151,7 @@ class Twig implements ServiceProviderInterface
         $app['twig']->addFunction(new \Twig_SimpleFunction('getStoryBySlug', function ($full_slug) use ($app) {
             try {
                 $app['storyblok']->getStoryBySlug($full_slug);
-                
+
                 $data = $app['storyblok']->getBody();
 
                 return $data['story'];
@@ -159,6 +159,27 @@ class Twig implements ServiceProviderInterface
                 throw new Exception($e);
             }
             return null;
+        }));
+
+        /**
+         * Returns true if you are in local environment
+         *
+         * Usage: `{% if isLocal() %} ... {% endif %}`
+         *
+         * @return boolean true if you are in local environment
+         */
+        $app['twig']->addFunction(new \Twig_SimpleFunction('isLocal', function () use ($app) {
+            return LOCAL;
+        }));
+
+        /**
+         * Get the contents of a file
+         *
+         * @param $path path of the file relative to the `public` directory with leading slash (e.g. /styles/inline.css)
+         * @return string Stringified content of the file
+         */
+        $app['twig']->addFunction(new \Twig_SimpleFunction('include_file', function ($path) use ($app) {
+            return @file_get_contents(PUBLIC_DIR . $path);
         }));
 
         function addToUrl($url, $key, $value = null) {

@@ -45,3 +45,11 @@
 <meta name="twitter:image" content="{% if story.content.meta.twitter_image %}{{ story.content.meta.twitter_image | twitter_image }}{% else %}{{ global('fallback_og_image') | twitter_image }}{% endif %}" />
 <meta name="twitter:description" content="{{story.content.meta.description}}" />
 <meta name="twitter:site" content="TWITTER_HANDLE" /> #}
+
+
+{# Critical CSS Styles above the fold #}
+{% if isLocal() %}
+    <link rel="stylesheet" href="{{ asset('styles/inline.css') }}" media="all" />
+{% else %}
+    <style>{{ include_file('/styles/inline.css') | raw }}</style>
+{% endif %}

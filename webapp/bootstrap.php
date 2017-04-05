@@ -4,6 +4,15 @@ define('WEBAPP_DIR', realpath(__DIR__ . '/'));
 define('ROOT_DIR', realpath(__DIR__ . '/../'));
 define('PUBLIC_DIR', realpath(__DIR__ . '/../public/'));
 
+if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false ||
+    strpos($_SERVER['SERVER_NAME'], '127.0.0.1') !== false ||
+    strpos($_SERVER['SERVER_NAME'], '0.0.0.0') !== false
+) {
+    define('LOCAL', true);
+} else {
+    define('LOCAL', false);
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Silex\Application();
