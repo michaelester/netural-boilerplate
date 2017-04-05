@@ -1,5 +1,4 @@
 import autoprefixer from 'gulp-autoprefixer';
-import browserify from 'browserify';
 import browserSync from 'browser-sync';
 import buffer from 'vinyl-buffer';
 import concat from 'gulp-concat';
@@ -17,10 +16,11 @@ import sass from 'gulp-sass';
 import sassLint from 'gulp-sass-lint';
 import source from 'vinyl-source-stream';
 import size from 'gulp-size';
-import tsify from 'tsify';
-import tslintify from 'tslintify';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
 
 import externals from './externals.js';
+import webpackConfig from './webpack.config.js';
 
 const reload = browserSync.reload;
 
@@ -52,25 +52,9 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('scripts', function () {
-    const b = browserify({
-            entries: 'app/scripts/main.ts',
-            debug: true
-        })
-        .plugin(tslintify, { format: 'stylish' })
-        .plugin(tsify, { noImplicitAny: true })
-        .on('error', notify.onError(function (error) {
-            // catches linting errors
-            console.log(error);
-            return 'Scripts Error: Please check your console.';
-        }));
 
-    return b.bundle()
-        .on('error', notify.onError(function (error) {
-            // catches syntax errors on bundling
-            return 'Bundling Error: Please check your console.';
-        }))
-        .pipe(source('main.js'))
-        .pipe(buffer())
+    return gulp.src('app/scripts/main.ts')
+        .pipe(webpackStream(webpackConfig, webpack))
         .pipe(gulp.dest('public/scripts'))
         .pipe(browserSync.stream());
 });
