@@ -1,27 +1,29 @@
-const autoprefixer = require('gulp-autoprefixer');
-const browserify = require('browserify');
-const browserSync = require('browser-sync');
-const buffer = require('vinyl-buffer');
-const concat = require('gulp-concat');
-const del = require('del');
-const File = require('vinyl');
-const fs = require('fs');
-const globbing = require('gulp-css-globbing');
-const gulp = require('gulp');
-const gitrev = require('git-rev');
-const imagemin = require('gulp-imagemin');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
-const php = require('gulp-connect-php');
-const reload = browserSync.reload;
-const sass = require('gulp-sass');
-const sassLint = require('gulp-sass-lint');
-const source = require('vinyl-source-stream');
-const size = require('gulp-size');
-const tsify = require('tsify');
-const tslintify = require('tslintify');
+import autoprefixer from 'gulp-autoprefixer';
+import browserify from 'browserify';
+import browserSync from 'browser-sync';
+import buffer from 'vinyl-buffer';
+import concat from 'gulp-concat';
+import del from 'del';
+import File from 'vinyl';
+import fs from 'fs';
+import globbing from 'gulp-css-globbing';
+import gulp from 'gulp';
+import gitrev from 'git-rev';
+import imagemin from 'gulp-imagemin';
+import notify from 'gulp-notify';
+import plumber from 'gulp-plumber';
+import php from 'gulp-connect-php';
+import sass from 'gulp-sass';
+import sassLint from 'gulp-sass-lint';
+import source from 'vinyl-source-stream';
+import size from 'gulp-size';
+import tsify from 'tsify';
+import tslintify from 'tslintify';
 
-const externals = require('./externals.js');
+import externals from './externals.js';
+
+const reload = browserSync.reload;
+
 
 gulp.task('clean', function () {
     del.sync(['public']);
