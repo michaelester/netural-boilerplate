@@ -54,10 +54,11 @@ gulp.task('scripts', function () {
             debug: true
         })
         .plugin(tslintify, { format: 'stylish' })
-        .on('error', error =>  console.error(error))
-        .plugin(tsify, { noImplicitAny: true });
+        .plugin(tsify, { noImplicitAny: true })
+        .on('error', error => console.error(error));
 
     return b.bundle()
+        // .on('error', error => console.error(error))
         .pipe(source('main.js'))
         .pipe(buffer())
         .pipe(gulp.dest('public/scripts'))

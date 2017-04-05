@@ -6,7 +6,8 @@ import { Controller } from '../lib/Controller';
  * Can be configured directly in the DOM like:
  *
  * ```
- * <a href="http://example.org" data-social-share="http://example.org" data-social-share-type="facebook">Share on facebook</a>
+ * <a href="http://example.org" data-social-share="http://example.org"
+ *     data-social-share-type="facebook">Share on facebook</a>
  * ```
  *
  * This would share the URL example.org to facebook, or at least
@@ -74,7 +75,7 @@ export class SocialShareController extends Controller {
         this.toShare = this.$().getAttribute('data-social-share');
         this.shareType = this.$().getAttribute('data-social-share-type');
 
-        if(!this.toShare) {
+        if (!this.toShare) {
             this.toShare = window.location.href;
         }
 
@@ -82,32 +83,40 @@ export class SocialShareController extends Controller {
 
         switch (this.shareType) {
             case 'facebook':
-                url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(this.toShare);
+                url = 'https://www.facebook.com/sharer/sharer.php?u='
+                    + encodeURIComponent(this.toShare);
                 break;
             case 'pinterest':
                 this.toShareMedia = this.$().getAttribute('data-social-share-media');
-                url = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(this.toShare);
+                url = 'https://pinterest.com/pin/create/button/?url='
+                    + encodeURIComponent(this.toShare);
                 url = this.addQueryParameterToUrlString(url, 'media', this.toShareMedia);
                 break;
             case 'twitter':
-                url = 'https://twitter.com/home?status=Have%20a%20look%20at%3A%20' + encodeURIComponent(this.toShare);
+                url = 'https://twitter.com/home?status=Have%20a%20look%20at%3A%20'
+                    + encodeURIComponent(this.toShare);
                 break;
             case 'google-plus':
-                url = 'https://plus.google.com/share?url=' + encodeURIComponent(this.toShare);
+                url = 'https://plus.google.com/share?url='
+                    + encodeURIComponent(this.toShare);
                 break;
             case 'linkedin':
-                url = 'https://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(this.toShare);
+                url = 'https://www.linkedin.com/shareArticle?mini=true&url='
+                    + encodeURIComponent(this.toShare);
                 break;
             case 'xing':
-                url = 'https://www.xing.com/app/user?op=share;url=' + encodeURIComponent(this.toShare);
+                url = 'https://www.xing.com/app/user?op=share;url='
+                    + encodeURIComponent(this.toShare);
                 break;
             case 'vk':
-                url = 'https://vk.com/share.php?url=' + encodeURIComponent(this.toShare);
+                url = 'https://vk.com/share.php?url='
+                    + encodeURIComponent(this.toShare);
                 break;
             default:
         }
-        if(this.shareType) {
-            window.open(url, '_blank', 'location=no,height=300,width=500,scrollbars=yes,status=yes');
+        if (this.shareType) {
+            window.open(url, '_blank',
+                'location=no,height=300,width=500,scrollbars=yes,status=yes');
         }
     }
 
@@ -120,7 +129,7 @@ export class SocialShareController extends Controller {
      * @returns {string} modified URL
      */
     addQueryParameterToUrlString(url: string, param: string, value: string): string {
-        let link: HTMLAnchorElement = document.createElement('a')
+        let link: HTMLAnchorElement = document.createElement('a');
         let regex = /(?:\?|&amp;|&)+([^=]+)(?:=([^&]*))*/g;
         let match: any;
         let str: any = [];

@@ -1,25 +1,25 @@
 /**
  * Generic controller class to entcapsulate the parsing
  * and other generic stuff
- * 
+ *
  * @export
  * @class Controller
  */
 export class Controller {
 
     /**
-     * Selector which will be overwritten from the 
-     * other Controllers so the parse function 
+     * Selector which will be overwritten from the
+     * other Controllers so the parse function
      * can directly query according to that selector.
-     * 
+     *
      * @static
-     * @type {string} 
+     * @type {string}
      */
-    static selector: string;    
-        
+    static selector: string;
+
     /**
      * Instances of the Controller
-     * 
+     *
      * @static
      * @type {Array<Controller>}
      */
@@ -27,14 +27,14 @@ export class Controller {
 
     /**
      * HTML attribute to mark elements which are already parsed
-     * 
+     *
      * @static
      */
     static PARSE_ID_ATTRIBUTE = 'data-parse-ids';
 
     /**
      * Element where the instance is applied
-     * 
+     *
      * @private
      * @type {Element}
      */
@@ -42,21 +42,21 @@ export class Controller {
 
     /**
      * Id of current Controller
-     * 
+     *
      * @type {number}
      */
     _id: number;
-    
+
     /**
      *
      * Access the current Element
-     * 
+     *
      * @returns {HTMLElement} currentElement
      */
     $(): HTMLElement;
     /**
      * Access element or query by selector
-     * 
+     *
      * @param {string} selector queryselector for childrens
      * @returns {NodeListOf<HTMLElement>} HTMLElement's which were found
      */
@@ -65,23 +65,24 @@ export class Controller {
         if (!(this._element instanceof Element)) {
             throw new Error('This controller has no element!');
         }
-        return selector ? <NodeListOf<HTMLElement>>this._element.querySelectorAll(selector) : <HTMLElement>this._element;
+        return selector ? <NodeListOf<HTMLElement>>this._element.querySelectorAll(selector) :
+            <HTMLElement>this._element;
     }
 
 
 	/**
      * Creates an instance of a Controller.
-     * 
+     *
      * @param {Element} root The element where the controller has been applied
      */
     constructor(element: HTMLElement) {
         this._element = element;
     }
 
-    
+
     /**
      * Looks for all Controllers which are instance of a certain class.
-     * 
+     *
      * @param {Function} klass should be instance of class
      * @returns {Array<Controller>} instances found
      */
@@ -97,17 +98,17 @@ export class Controller {
         return result;
     }
 
-        
+
     /**
      * Returns Controller by certain ID
-     * 
+     *
      * @param {string} id Generated ID in DOM
      * @returns {Controller} instanceOf Controller
      */
     getControllerById(id: string): Controller;
     /**
      * Returns Controller by certain ID
-     * 
+     *
      * @param {number} id Generated ID in DOM
      * @returns {Controller} instanceOf Controller
      */
@@ -116,16 +117,16 @@ export class Controller {
         return Controller.getControllerById.apply(this, arguments);
     }
 
-        
+
     /**
      * Returns binded instance of Controller from element 'element'
      * if they are instances of 'klass'
-     * 
+     *
      * @param {HTMLElement} element haystack
      * @param {Function} klass needle
      * @returns {Controller} instance of Controller
      */
-    getControllerByElementAndClass(element: HTMLElement, klass: Function):Controller {
+    getControllerByElementAndClass (element: HTMLElement, klass: Function): Controller {
         const instances: Array<Controller> = Controller._instances;
         for (let i = 0, max = instances.length; i < max; i++) {
             let instance = instances[i];
@@ -135,10 +136,10 @@ export class Controller {
         }
         return null;
     }
-  
+
     /**
      * Returns all Controllers which are binded to the element
-     * 
+     *
      * @param {HTMLElement} element haystack
      * @returns {Array<Controller>} instances of Controller
      */
@@ -148,21 +149,22 @@ export class Controller {
 
     /**
      * Returns all Controllers which are nested in current Element.
-     * 
+     *
      * @returns {Array<Controller>} instances of Controller
      */
     getNestedControllers(): Array<Controller> {
-        let controllers: Array<Controller> = []; 
+        let controllers: Array<Controller> = [];
         let elementsWithControllers = this.$(`[${Controller.PARSE_ID_ATTRIBUTE}]`);
         for (let i = 0, max = elementsWithControllers.length; i < max; i++) {
-            controllers = controllers.concat(this.getControllersByElement(elementsWithControllers[i]));   
+            controllers = controllers.concat(
+                this.getControllersByElement(elementsWithControllers[i]));
         }
         return controllers;
     }
 
     /**
      * Returns all Controllers which are binded to the element
-     * 
+     *
      * @param {HTMLElement} element haystack
      * @returns {Array<Controller>} instances of Controller
      */
@@ -181,17 +183,17 @@ export class Controller {
         }
         return instances;
     }
-  
+
     /**
      * Returns Controller by certain ID
-     * 
+     *
      * @param {string} id Generated ID in DOM
      * @returns {Controller} instanceOf Controller
      */
     static getControllerById(id: string): Controller;
     /**
      * Returns Controller by certain ID
-     * 
+     *
      * @param {number} id Generated ID in DOM
      * @returns {Controller} instanceOf Controller
      */
@@ -210,7 +212,7 @@ export class Controller {
 
     /**
      * Hook for running code before the controller is instantiated
-     * 
+     *
      * @static
      * @param {NodeListOf<Element>} elements List of elements where the controller will be applied
      */
@@ -218,7 +220,7 @@ export class Controller {
 
     /**
      * Hook for running code after the controller has been instantiated.
-     * 
+     *
      * @static
      * @param {NodeListOf<Element>} elements List of elements where the controller has been applied
      * @param {Array<Controller>} instances List of controller instances created
@@ -228,7 +230,7 @@ export class Controller {
     /**
      * Look for elements with a specific selector and creates an instance for
      * every element.
-     * 
+     *
      * @static
 	 * @param {string} selector Dom selector
      * @param {Element} [root=document.body] Starting element for parsing
@@ -239,8 +241,9 @@ export class Controller {
         } else if (!selector) {
             throw new Error('No Selector for Controller found!');
         }
-        
-        const elements: NodeListOf<HTMLElement> = <NodeListOf<HTMLElement>>root.querySelectorAll(selector);
+
+        const elements: NodeListOf<HTMLElement> =
+            <NodeListOf<HTMLElement>>root.querySelectorAll(selector);
         this.beforeInstantiating(elements);
 
         for (let i = 0; i < elements.length; i++) {
@@ -263,7 +266,8 @@ export class Controller {
             } else {
                 controllerIdsString = '';
             }
-            element.setAttribute(Controller.PARSE_ID_ATTRIBUTE, (controllerIdsString + ' ' + id).trim());
+            element.setAttribute(Controller.PARSE_ID_ATTRIBUTE,
+                (controllerIdsString + ' ' + id).trim());
             let instance = new this(element);
             instance._id = id;
             Controller._instances.push(instance);

@@ -11,7 +11,8 @@ import * as controllers from '../controllers/Controllers';
  * inside that newly created HTMLElement.
  *
  * @export
- * @param {HTMLElement} [element] DOM Element in which the Controller should be initialized - if not set we're using the document.body;
+ * @param {HTMLElement} [element] DOM Element in which the Controller should be initialized -
+ *                                if not set we're using the document.body;
  */
 export function parse(element?: HTMLElement) {
     let controllerClasses: any = controllers;
