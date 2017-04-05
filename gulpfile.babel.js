@@ -15,6 +15,7 @@ const plumber = require('gulp-plumber');
 const php = require('gulp-connect-php');
 const reload = browserSync.reload;
 const sass = require('gulp-sass');
+const sassLint = require('gulp-sass-lint');
 const source = require('vinyl-source-stream');
 const size = require('gulp-size');
 const tsify = require('tsify');
@@ -84,10 +85,13 @@ gulp.task('styles', function () {
         .pipe(globbing({
             extensions: ['.scss']
         }))
+        .pipe(sassLint())
+        .pipe(sassLint.format())
+        .pipe(sassLint.failOnError())
+        .on('error', error => console.error(error.message))
         .pipe(sass({
             outputStyle: 'expanded'
         }))
-        .on('error', notify.onError(function (error) { return 'Styles Error: Please check your console.'; }))
         .pipe(autoprefixer())
         .pipe(gulp.dest('public/styles'))
         .pipe(browserSync.stream());
