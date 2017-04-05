@@ -5,6 +5,11 @@
 @import 'util/fonts';
 
 // NODE MODULES
+@import 'node_modules/uikit/dist/scss/uikit-mixins';
+@import 'node_modules/uikit/dist/scss/uikit-variables';
+@import 'node_modules/uikit/dist/scss/core/utility';
+@import 'node_modules/uikit/dist/scss/core/base';
+@import 'node_modules/uikit/dist/scss/core/grid';
 
 // BASE
 @import 'base/**/*';

@@ -91,4 +91,12 @@ sudo mv composer.phar /usr/local/bin/composer
 - `app/styles/inline.scss` will be inlined on top of each page
 - If you optimize for critical CSS, **move** styles from `main.scss` to `inline.scss` 
 
+## How can I add font precaching with service workers?
+- Please check out other projects, because techniques change all the time
+
+## How can I use SVG icons?
+- Place the `my-icon.svg` file in the `app/images` folder
+- Use `{% set myIcon = include_file('images/my-icon.svg') %}` in the Twig templates
+- 
+
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
