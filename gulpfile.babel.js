@@ -133,7 +133,7 @@ gulp.task('build', ['clean', 'version', 'styles', 'scripts', 'scripts:vendor', '
 function string_src(filename, string) {
     var src = require('stream').Readable({ objectMode: true });
     src._read = function () {
-        this.push(new File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+        this.push(new File({ cwd: "", base: ".", path: filename, contents: new Buffer(string) }))
         this.push(null)
     };
     return src;
