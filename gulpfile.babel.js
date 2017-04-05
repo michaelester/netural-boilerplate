@@ -90,7 +90,7 @@ gulp.task('styles', function () {
         .pipe(sassLint.failOnError())
         .on('error', error => console.error(error.message))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'compressed'
         }))
         .pipe(autoprefixer())
         .pipe(gulp.dest('public/styles'))
