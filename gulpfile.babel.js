@@ -55,10 +55,17 @@ gulp.task('scripts', function () {
         })
         .plugin(tslintify, { format: 'stylish' })
         .plugin(tsify, { noImplicitAny: true })
-        .on('error', error => console.error(error));
+        .on('error', notify.onError(function (error) {
+            // catches linting errors
+            console.log(error);
+            return 'Scripts Error: Please check your console.';
+        }));
 
     return b.bundle()
-        // .on('error', error => console.error(error))
+        .on('error', notify.onError(function (error) {
+            // catches syntax errors on bundling
+            return 'Bundling Error: Please check your console.';
+        }))
         .pipe(source('main.js'))
         .pipe(buffer())
         .pipe(gulp.dest('public/scripts'))
@@ -80,7 +87,7 @@ gulp.task('styles', function () {
         .pipe(sass({
             outputStyle: 'expanded'
         }))
-        .on('error', notify.onError(function (error) { return 'There is an error in your stylesheet.'; }))
+        .on('error', notify.onError(function (error) { return 'Styles Error: Please check your console.'; }))
         .pipe(autoprefixer())
         .pipe(gulp.dest('public/styles'))
         .pipe(browserSync.stream());
