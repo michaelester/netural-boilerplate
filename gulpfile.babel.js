@@ -54,6 +54,7 @@ gulp.task('fonts', function () {
 gulp.task('scripts', function () {
 
     return gulp.src('app/scripts/main.ts')
+        .pipe(plumber({errorHandler: notify.onError("JS Error: <%= error.message %>")}))
         .pipe(webpackStream(webpackConfig, webpack))
         .pipe(gulp.dest('public/scripts'))
         .pipe(browserSync.stream());
@@ -67,7 +68,7 @@ gulp.task('scripts:vendor', function () {
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/**/*.{sass,scss}')
-        .pipe(plumber())
+        .pipe(plumber({errorHandler: notify.onError("SCSS Error: <%= error.message %>")}))
         .pipe(globbing({
             extensions: ['.scss']
         }))
