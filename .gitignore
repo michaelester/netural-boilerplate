@@ -43,4 +43,3 @@ webapp/app.db
 cache/*
 !cache/keep
 public/*
-webapp/config.php

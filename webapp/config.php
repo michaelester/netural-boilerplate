@@ -7,4 +7,4 @@ $app['config.redirect_home']    = true;
 $app['config.version']           = @file_get_contents(PUBLIC_DIR . '/version.cache'); // initializes with git hash
 
 $app['config.home']             = 'home';
-$app['storyblok.privateToken']  = 'BDwvpxjAtw8YNdVwjsSJLwtt';
+$app['storyblok.privateToken']  = 'Iw3XKcJb6MwkdZEwoQ9BCQtt'; // a free-for-all example space
