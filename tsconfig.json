@@ -9,6 +9,6 @@
     "!./node_modules/**/*.ts"
   ],
   "files": [
-    "./app/scripts/main.ts"
+    "app/scripts/main.ts"
   ]
 }

@@ -1,0 +1,55 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="author" content="Netural — www.netural.com">
+<meta name="robots" content="index,follow">
+<meta name="format-detection" content="telephone=no" /> {# iOS: disable phone number highlighting #}
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="generator" content="storyblok">
+<meta name="cms" content="https://www.storyblok.com">
+{% for alternate in story.alternates %}
+<link href="/{{ alternate.full_slug | url }} " hreflang="{{ alternate.full_slug|split('/')[0] }}" rel="alternate">
+{% endfor %}
+
+{# Favicons #}
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/images/favicons/manifest.json">
+<link rel="shortcut icon" href="/images/favicons/favicon.ico">
+<meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+{#
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="HEX_VALUE">
+<meta name="theme-color" content="HEX_VALUE">
+ #}
+
+
+<title>{{ story.name }}</title>
+
+{# Uncomment if you use the storyblok meta plugin #}
+
+{# <title>{{ story.content.meta.title }}</title>
+<meta name="description" content="{{story.content.meta.description}}">
+<meta name="indeximage" content="{% if story.content.meta.og_image %}{{ story.content.meta.og_image | image }}{% else %}{{ global('fallback_og_image') | image }}{% endif %}">
+<meta name="indexkeywords" content="{{story.content.component}}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SITENAME">
+<meta property="og:image" content="{% if story.content.meta.og_image %}{{ story.content.meta.og_image | og_image }}{% else %}{{ global('fallback_og_image') | og_image }}{% endif %}" />
+<meta property="og:title" content="{{ story.content.meta.og_title }}" />
+<meta property="og:description" content="{{story.content.meta.og_description}}" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{story.content.meta.twitter_title}}" />
+<meta name="twitter:image" content="{% if story.content.meta.twitter_image %}{{ story.content.meta.twitter_image | twitter_image }}{% else %}{{ global('fallback_og_image') | twitter_image }}{% endif %}" />
+<meta name="twitter:description" content="{{story.content.meta.description}}" />
+<meta name="twitter:site" content="TWITTER_HANDLE" /> #}
+
+
+{# Critical CSS Styles above the fold #}
+{% if isLocal() %}
+    <link rel="stylesheet" href="{{ asset('styles/inline.css') }}" media="all" />
+{% else %}
+    <style>{{ include_file('/styles/inline.css') | raw }}</style>
+{% endif %}
