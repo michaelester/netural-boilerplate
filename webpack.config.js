@@ -1,5 +1,21 @@
-var path = require('path');
-var webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
+
+const plugins = [
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+          screw_ie8: true,
+          unused: true,
+          sequences: true,
+          dead_code: true,
+          evaluate: true,
+        },
+        output: {
+          comments: false,
+        }
+    })
+];
 
 module.exports = {
     entry: {
@@ -26,7 +42,8 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.ts']
-    }
+    },
+    plugins
 }
 
 
