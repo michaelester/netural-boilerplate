@@ -1,2 +1,3 @@
 export { AppController } from './AppController';
-export { SocialShareController } from './SocialShareController';
+// export { CookiebarController } from './CookiebarController';
+// export { SocialShareController } from './SocialShareController';

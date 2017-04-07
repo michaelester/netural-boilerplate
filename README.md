@@ -97,6 +97,12 @@ sudo mv composer.phar /usr/local/bin/composer
 ## How can I use SVG icons?
 - Place the `my-icon.svg` file in the `app/images` folder
 - Use `{% set myIcon = include_file('images/my-icon.svg') %}` in the Twig templates
-- 
+
+## How can I add a new language?
+- Add it to the array `$app['config.availableLocales']` in `config.php`
+
+## How can I add a cookiebar?
+- Include the `cookiebar.twig` component in a page template
+- Uncomment the `CookiebarController` in `app/scripts/controllers/Controllers.ts`
 
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
