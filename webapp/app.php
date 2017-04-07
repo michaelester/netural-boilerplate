@@ -4,6 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 $app->before(function() use ($app) {
+    $app['config.locale'] = $app['request']->attributes->get('_locale');
     $app['globaldata'] = array();
 });
 

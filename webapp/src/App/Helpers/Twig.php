@@ -64,6 +64,27 @@ class Twig implements ServiceProviderInterface
              echo '</pre>';
         }));
 
+        /**
+         * get labels from storyblok
+         * make sure you have a Datasource de_labels
+         */
+        $app['twig']->addFunction(new \Twig_SimpleFunction('label', function ($key) use ($app) {
+            try {
+                if(!isset($app['labels'])) {
+                    $app['labels'] = $app['storyblok']->getDatasourceEntries($app['config.locale'] . '_labels', array('per_page' => 1000))->getAsNameValueArray();
+                }
+                if(!isset($app['labels'])) {
+                    return ucfirst($key);
+                }
+                if(!isset($app['labels'][$key])) {
+                    return ucfirst($key);
+                }
+            } catch (\Exception $e) {
+                throw new \Exception($e);
+            }
+            return $app['labels'][$key];
+        }));
+
         /*
         * asset function (beta)
         *
