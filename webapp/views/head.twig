@@ -35,7 +35,7 @@
 <meta name="indexkeywords" content="{{story.content.component}}">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="SITENAME">
+<meta property="og:site_name" content="{{ story.content.meta.title }}">
 <meta property="og:image" content="{% if story.content.meta.og_image %}{{ story.content.meta.og_image | og_image }}{% else %}{{ global('fallback_og_image') | og_image }}{% endif %}" />
 <meta property="og:title" content="{{ story.content.meta.og_title }}" />
 <meta property="og:description" content="{{story.content.meta.og_description}}" />
