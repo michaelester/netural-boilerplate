@@ -97,6 +97,7 @@ sudo mv composer.phar /usr/local/bin/composer
 ## How can I use SVG icons?
 - Place the `my-icon.svg` file in the `app/images` folder
 - Use `{% set myIcon = include_file('images/my-icon.svg') %}` in the Twig templates
+- If you need SVG icons in CSS, please follow [Making the switch](https://sarasoueidan.com/blog/icon-fonts-to-svg/)
 
 ## How can I add a new language?
 - Add it to the array `$app['config.availableLocales']` in `config.php`
