@@ -1,4 +1,5 @@
 import autoprefixer from 'gulp-autoprefixer';
+import base64 from 'gulp-base64';
 import browserSync from 'browser-sync';
 import buffer from 'vinyl-buffer';
 import concat from 'gulp-concat';
@@ -12,6 +13,7 @@ import imagemin from 'gulp-imagemin';
 import notify from 'gulp-notify';
 import plumber from 'gulp-plumber';
 import php from 'gulp-connect-php';
+import rename from 'gulp-rename';
 import sass from 'gulp-sass';
 import sassLint from 'gulp-sass-lint';
 import source from 'vinyl-source-stream';
@@ -44,8 +46,15 @@ gulp.task('content', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src('app/fonts/**/*')
-        .pipe(gulp.dest('public/fonts'))
+    return gulp.src('app/styles/fonts.scss')
+        .pipe(base64({
+            baseDir: __dirname,
+            extensions: ['woff'],
+            maxImageSize: 8000 * 1024,
+            debug: true
+        }))
+        .pipe(rename('fonts.css'))
+        .pipe(gulp.dest('public/styles'))
         .pipe(size({
             title: "fonts"
         }));
@@ -66,7 +75,7 @@ gulp.task('scripts:vendor', function () {
 });
 
 gulp.task('styles', function () {
-    return gulp.src('app/styles/**/*.{sass,scss}')
+    return gulp.src(['app/styles/**/*.{sass,scss}', '!app/styles/fonts.scss'])
         .pipe(plumber({errorHandler: notify.onError("SCSS Error: <%= error.message %>")}))
         .pipe(globbing({
             extensions: ['.scss']
