@@ -44,13 +44,6 @@ gulp.task('content', function () {
 });
 
 gulp.task('fonts', function () {
-    const fontsCss = gulp.src('app/styles/util/_fonts.scss')
-        .pipe(sass({
-            outputStyle: 'compressed'
-        }))
-        .pipe(autoprefixer())
-        .pipe(gulp.dest('public/styles'));
-
     return gulp.src('app/fonts/**/*')
         .pipe(gulp.dest('public/fonts'))
         .pipe(size({
