@@ -52,7 +52,6 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('scripts', function () {
-
     return gulp.src('app/scripts/main.ts')
         .pipe(plumber({errorHandler: notify.onError("JS Error: <%= error.message %>")}))
         .pipe(webpackStream(webpackConfig, webpack))

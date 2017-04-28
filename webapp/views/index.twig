@@ -9,6 +9,33 @@
 
 <body>
 
+    <script type="text/javascript">
+      var fontcachename = 'netural-boilerplate-fontcache';
+      var fontversion = '1';
+    </script>
+
+   <script type="text/javascript">
+        /* FONT LOCAL STORAGE */
+        function addStyles(s) {
+            var a = document.createElement('style');
+            a.innerHTML = s;
+            var sc = document.getElementsByTagName("script")[0];
+            sc.parentNode.insertBefore(a, sc);
+        }
+        try {
+          var s = window.localStorage.getItem(fontcachename);
+          if(s !== null) {
+              var parts = s.split('####');
+              if(parts.length !== 2 || parts[0] !== fontversion) {
+                  window.localStorage.removeItem(fontcachename);
+              } else {
+                  addStyles(parts[1]);
+              }
+          }
+      } catch(e) {}
+    </script>
+
+
     {% include 'components/' ~ story.content.component ~ '.twig' with { blok: story.content } %}
 
     <script type="text/javascript" src="{{ asset('scripts/main.js') | version }}"></script>
@@ -41,6 +68,23 @@
         });
     </script>
     {% endif %}
+
+    <script type="text/javascript">
+      /* FONT LOCAL STORAGE */
+      (function(ls, x) {
+        try {
+          if(ls.getItem(fontcachename) === null) {
+            var h = new x();
+            h.open('GET', '{{ asset('styles/fonts.css') }}' );
+            h.send();
+            h.onload = function() {addStyles(this.responseText);
+            ls.setItem(fontcachename, fontversion+'####'+this.responseText);
+            }
+          }
+        } catch(e) {}
+      })(window.localStorage, XMLHttpRequest);
+    </script>
+
 
     {# Google Analytics #}
     <script>
