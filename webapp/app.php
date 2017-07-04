@@ -38,6 +38,7 @@ $app->get('/clear_cache', function() use($app) {
 	return $app->json(array('success' => true));
 });
 
+$app->mount('/api/googlecaptcha', new App\Controllers\GoogleCaptcha());
 $app->mount('/{slug}', new App\Controllers\Web());
 
 $app->run();
