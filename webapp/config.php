@@ -2,7 +2,7 @@
 
 $app['debug']                   = true;
 $app['config.twig.cache']       = false;
-$app['config.redirect_home']    = true;
+$app['config.redirect_home']    = false;
 
 $app['config.locale']           = 'de';
 $app['config.availableLocales'] = array('de');
