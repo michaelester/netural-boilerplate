@@ -106,4 +106,48 @@ sudo mv composer.phar /usr/local/bin/composer
 - Include the `cookiebar.twig` component in a page template
 - Uncomment the `CookiebarController` in `app/scripts/controllers/Controllers.ts`
 
+## How can I use the Google Recaptcha?
+- Register your website at [Google Recaptcha](https://www.google.com/recaptcha)
+- Add your captcha secret in `config.php`
+- Embed the google recaptcha script at the bottom of the `<head>` tag
+
+```
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+```
+
+- Add your data attributes to the submit button of the form
+
+```
+<button
+    class="g-recaptcha"
+    data-sitekey="<<< RECAPTCHA SITEKEY >>>"
+    data-callback="submitForm">
+    Submit
+</button>
+```
+
+- In your javascript form controller, you can add your `formData` and add the `g-recaptcha-response` value (set by google). With that, you will make a request to `/api/googlerecaptcha`.
+
+```
+const requestData = {
+    formData,
+};
+
+requestData['g-recaptcha-response'] = form.find('[name="g-recaptcha-response"]').val();
+
+$.ajax({
+    type: 'POST',
+    url: '/api/googlerecaptcha',
+    data: requestData,
+    success() {
+        // form submitted
+    },
+    error() {
+        // form not submitted
+    },
+});
+```
+
+- If the captcha is valid, you can implement the main form request in `webapp/src/App/Controllers/GoogleCaptcha.php`.
+
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
