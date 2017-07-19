@@ -35,8 +35,9 @@
       } catch(e) {}
     </script>
 
-
-    {% include 'components/' ~ story.content.component ~ '.twig' with { blok: story.content } %}
+    <div class="uk-container uk-container-center uk-margin-top">
+        {% include 'components/' ~ story.content.component ~ '.twig' with { blok: story.content } %}
+    </div>
 
     <script type="text/javascript" src="{{ asset('scripts/main.js') | version }}"></script>
 
