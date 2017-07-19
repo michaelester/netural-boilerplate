@@ -1,8 +1,9 @@
-import autoprefixer from 'gulp-autoprefixer';
+import autoprefixer from 'autoprefixer';
 import base64 from 'gulp-base64';
 import browserSync from 'browser-sync';
 import buffer from 'vinyl-buffer';
 import concat from 'gulp-concat';
+import cssnano from 'cssnano';
 import del from 'del';
 import File from 'vinyl';
 import fs from 'fs';
@@ -13,19 +14,26 @@ import imagemin from 'gulp-imagemin';
 import notify from 'gulp-notify';
 import plumber from 'gulp-plumber';
 import php from 'gulp-connect-php';
+import postCSS from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sass from 'gulp-sass';
-import sassLint from 'gulp-sass-lint';
+import sassGlob from 'gulp-sass-glob';
+import stylelint from 'gulp-stylelint';
 import source from 'vinyl-source-stream';
+import sourcemaps from 'gulp-sourcemaps';
 import size from 'gulp-size';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 
 import externals from './externals.js';
 import webpackConfig from './webpack.config.js';
+import packageJSON from './package.json';
 
 const reload = browserSync.reload;
-
+const postcssPlugins = [
+    autoprefixer({ browsers: packageJSON.browserslist }),
+    cssnano()
+];
 
 gulp.task('clean', function () {
     del.sync(['public']);
@@ -77,19 +85,24 @@ gulp.task('scripts:vendor', function () {
 gulp.task('styles', function () {
     return gulp.src(['app/styles/**/*.{sass,scss}', '!app/styles/fonts.scss'])
         .pipe(plumber({errorHandler: notify.onError("SCSS Error: <%= error.message %>")}))
-        .pipe(globbing({
-            extensions: ['.scss']
+        .pipe(sassGlob())
+        .pipe(stylelint({
+          reporters: [
+            {formatter: 'string', console: true}
+          ]
         }))
-        .pipe(sassLint())
-        .pipe(sassLint.format())
-        .pipe(sassLint.failOnError())
         .on('error', error => console.error(error.message))
+        .pipe(sourcemaps.init())
         .pipe(sass({
-            outputStyle: 'compressed'
+            outputStyle: 'expanded'
         }))
-        .pipe(autoprefixer())
+        .pipe(postCSS(postcssPlugins))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('public/styles'))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
+        .pipe(size({
+            title: "styles"
+        }));
 });
 
 gulp.task('images', function () {
