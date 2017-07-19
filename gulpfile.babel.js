@@ -46,7 +46,7 @@ gulp.task('version', function () {
 });
 
 gulp.task('content', function () {
-    return gulp.src('app/**/*.{xml,json,yml,php}')
+    return gulp.src(['app/**/*.{xml,json,yml,php}', '!app/index-original.php', '!app/index-maintenance.php'])
         .pipe(gulp.dest('public'))
         .pipe(size({
             title: "content"

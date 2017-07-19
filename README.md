@@ -150,4 +150,11 @@ $.ajax({
 
 - If the captcha is valid, you can implement the main form request in `webapp/src/App/Controllers/GoogleCaptcha.php`.
 
+## How can I enable the maintenance page?
+- Go to the `app` folder
+- Rename `index.php` to `index-original.php`
+- Rename `index-maintenance.php` to `index.php`
+
+Gulp copies the `index.php` file from the `app` folder to the `public` folder. The maintenance page is a standalone page, it won't load any dependencies. In case you like to embed images on the maintenance page, you can add them to the `app/images` folder and the gulp task will copy them to the `public/images` folder.
+
 > [Netural](https://www.netural.com/) & [Storyblok](https://www.storyblok.com/)
