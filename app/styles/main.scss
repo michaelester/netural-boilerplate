@@ -10,8 +10,10 @@
 @import 'node_modules/uikit/dist/scss/core/base';
 @import 'node_modules/uikit/dist/scss/core/grid';
 
+/* stylelint-disable */
 // BASE
 @import 'base/**/*';
 
 // COMPONENTS
 @import 'components/**/*';
+/* stylelint-enable */
