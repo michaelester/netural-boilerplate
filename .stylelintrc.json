@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-sass-guidelines",
   "rules": {
+    "order/properties-alphabetical-order": null,
     "function-comma-space-after": "always",
     "indentation": 4,
     "max-empty-lines": 3,

@@ -1,12 +1,13 @@
 {
-  "name": "netural-boilerplate",
-  "description": "netural-boilerplate",
+  "name": "silex-storyblok-boilerplate",
+  "description": "A silex boilerplate setup for selfhosted storyblok projects",
   "private": true,
-  "version": "1.3.0",
-  "author": "Dominik Angerer, Alexander Feiglstorfer, Klaus Fischer <klaus.fischer@netural.com>",
+  "version": "1.0.0",
+  "author": "Michael Ester <mail@michaelester.at>, Dominik Angerer, Alexander Feiglstorfer, Klaus Fischer <klaus.fischer@netural.com>",
   "scripts": {
-    "lint": "stylelint 'app/styles/**/*.scss' && tslint -p tsconfig.json 'app/scripts/**/*.ts'",
     "dev": "gulp",
+    "build": "gulp compress",
+    "lint": "stylelint 'app/styles/**/*.scss' && tslint -p tsconfig.json 'app/scripts/**/*.ts'",
     "precommit": "npm run lint"
   },
   "devDependencies": {
@@ -32,22 +33,22 @@
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-stylelint": "^4.0.0",
+    "gulp-zip": "^4.0.0",
     "husky": "^0.14.3",
+    "jquery": "^3.2.1",
     "stylelint": "^8.0.0",
     "stylelint-config-sass-guidelines": "^2.2.0",
+    "swiper": "^4.0.7",
     "ts-loader": "^2.0.3",
     "tslint": "^4.0.0",
     "tslint-loader": "^3.4.3",
     "typescript": "^2.0.0",
+    "uikit": "^3.0.0-beta.35",
     "vinyl": "^2.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^2.3.3",
     "webpack-stream": "^3.2.0"
-  },
-  "dependencies": {
-    "jquery": "^3.1.1",
-    "uikit": "^2.27.2"
   },
   "browserslist": [
     "> 1%",

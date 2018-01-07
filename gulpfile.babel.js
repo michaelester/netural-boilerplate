@@ -24,6 +24,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import size from 'gulp-size';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
+import zip from 'gulp-zip';
 
 import externals from './externals.js';
 import webpackConfig from './webpack.config.js';
@@ -35,37 +36,43 @@ const postcssPlugins = [
     cssnano()
 ];
 
+gulp.task('compress', ['build', 'build-meta'], function () {
+    var globs = [
+        'public/**',
+        'webapp/**'
+    ];
+
+    return gulp.src(globs, { base: '.', dot: true })
+        .pipe(zip(packageJSON.name + '.zip'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build-meta', function () {
+    return gulp.src('public_meta/**/*', { dot: true })
+        .pipe(gulp.dest('public'));
+});
+
 gulp.task('clean', function () {
     del.sync(['public']);
 });
 
 gulp.task('version', function () {
-    return gitrev.long(function (str) {
+    return gitrev.short(function (str) {
             return string_src('version.cache', str).pipe(gulp.dest('public'))
         });
 });
 
 gulp.task('content', function () {
-    return gulp.src(['app/**/*.{xml,json,yml,php}', '!app/index-original.php', '!app/index-maintenance.php'])
+    return gulp.src(['app/**/*.{xml,json,yml,php}'])
         .pipe(gulp.dest('public'))
         .pipe(size({
             title: "content"
         }));
 });
 
-gulp.task('fonts', function () {
-    return gulp.src('app/styles/fonts.scss')
-        .pipe(base64({
-            baseDir: __dirname,
-            extensions: ['woff'],
-            maxImageSize: 8000 * 1024,
-            debug: true
-        }))
-        .pipe(rename('fonts.css'))
-        .pipe(gulp.dest('public/styles'))
-        .pipe(size({
-            title: "fonts"
-        }));
+gulp.task('fonts', function() {
+    return gulp.src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+        .pipe(gulp.dest('public/fonts'));
 });
 
 gulp.task('scripts', function () {

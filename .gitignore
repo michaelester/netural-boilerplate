@@ -36,10 +36,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Silex Boilerplate
-webapp/vendor
-webapp/cache
-webapp/app.db
-cache/*
-!cache/keep
-public/*
+# Silex Storyblok Boilerplate
+/cache
+/public
+/webapp/vendor

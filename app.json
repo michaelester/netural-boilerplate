@@ -1,7 +1,6 @@
 {
   "name": "Silex Storyblok Boilerplate",
-  "description": "A barebones silex app for storyblok",
-  "repository": "https://github.com/storyblok/silex-boilerplate",
-  "logo": "https://www.storyblok.com/images/favicon.png",
-  "keywords": ["silex", "storyblok"]
+  "description": "A silex boilerplate setup for selfhosted storyblok projects",
+  "repository": "https://github.com/michaelester/silex-storyblok-boilerplate",
+  "keywords": ["silex", "storyblok", "selfhosted"]
 }
